@@ -1,6 +1,4 @@
-FROM openjdk:8-jdk
-
-LABEL maintainer="marc@circleci.com"
+FROM jetbrains/teamcity-agent:10.0.3
 
 # Initial Command run as `root`.
 
@@ -93,3 +91,7 @@ RUN sdkmanager \
   "build-tools;27.0.3"
 
 RUN sdkmanager "platforms;android-API_LEVEL"
+
+# Fastlane
+RUN sudo apt-get install ruby ruby-dev ruby-build
+RUN sudo gem install fastlane
