@@ -2,15 +2,6 @@ FROM jetbrains/teamcity-agent:10.0.3
 
 # Install Google Cloud SDK
 
-RUN sudo apt-get update -qqy && sudo apt-get install -qqy \
-        python-dev \
-        python-setuptools \
-        apt-transport-https \
-        lsb-release
-
-RUN sudo easy_install -U pip && \
-    sudo pip install -U crcmod
-
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -32,7 +23,6 @@ RUN sudo apt-get update && \
 
 # Download and install Android SDK
 RUN sudo mkdir -p ${android_home} && \
-    sudo chown -R circleci:circleci ${android_home} && \
     curl --silent --show-error --location --fail --retry 3 --output /tmp/${sdk_version} https://dl.google.com/android/repository/${sdk_version} && \
     unzip -q /tmp/${sdk_version} -d ${android_home} && \
     rm /tmp/${sdk_version}
