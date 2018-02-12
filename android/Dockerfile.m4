@@ -57,7 +57,7 @@ RUN sdkmanager \
   "build-tools;27.0.2" \
   "build-tools;27.0.3"
 
-RUN sdkmanager "platforms;android-API_LEVEL"
+RUN sdkmanager "platforms;android-27"
 
 # Fastlane
 RUN sudo apt-get install ruby ruby-dev ruby-build
